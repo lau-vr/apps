@@ -1,0 +1,12 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "webxr/package.json",
+        "use": "@now/static-build"
+      }
+    ],
+    "routes": [
+      { "src": "/(.*)", "dest": "webxr/$1" }
+    ]
+  }

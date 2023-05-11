@@ -1,0 +1,175 @@
+<html>
+
+<head>
+  <title>XR Graph</title>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-41295198-4"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,500,0..1,-50..200" />
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-41295198-4');
+
+    function goBack() {
+      const params = getAllGetParameters()
+      const func2Param = params.function2 ? `&function2=${encodeURIComponent(params.function2)}` : ''
+      console.log(`home.html?function=${encodeURIComponent(params.function)}${func2Param}`)
+      window.location.href = `home.html?function=${encodeURIComponent(params.function)}${func2Param}`
+    }
+  </script>
+</head>
+
+<body>
+  <span
+    class="material-symbols-outlined"
+    style="position: fixed; top: 20; left: 20; z-index: 1; font-size: 42px; cursor: pointer; color: #ffb95d"
+    onclick="goBack()"  
+  >
+    logout
+  </span>
+<a-scene shadow="type: pcfsoft" physics="driver: local; gravity: 0; friction: 0; restitution: 0;" renderer="antialias: true" raycaster="objects: [my-slider]">
+  <a-assets>
+    <a-mixin id="touch" class="hands" ></a-mixin>
+  </a-assets>
+
+  <a-entity class="environment" environment="groundTexture: none; grid: 1x1; gridColor: #222; ground: flat; skyType: color; skyColor: gray; horizonColor: #222; groundColor: black; groundColor2: #fff"></a-entity>
+
+  <a-assets>
+
+    <a-asset-item id="plus" src="https://cdn.glitch.global/126b4e72-2ac0-4b74-ad2f-4be152694c26/MINUSS%20.glb?v=1675981115171"></a-asset-item>
+
+    <a-asset-item id="arrow" src="https://cdn.glitch.global/126b4e72-2ac0-4b74-ad2f-4be152694c26/ARROW%202%20.glb?v=1675978565131"></a-asset-item>
+
+    <a-asset-item id="minus" src="https://cdn.glitch.global/126b4e72-2ac0-4b74-ad2f-4be152694c26/pluss.glb?v=1675981125859"></a-asset-item>
+
+    <a-asset-item id="teleportationArea" src="https://raw.githubusercontent.com/Youssef140/Assets/main/Assets/magic_ring_-_green/scene.gltf"></a-asset-item>
+
+     <a-asset-item id="class" src="https://cdn.glitch.me/9c8de3fe-0afd-4613-b8a2-ca66167d2a9d/CLASSROOM%203.glb"></a-asset-item>
+
+    <a-asset-item id="exit-sign" src="https://cdn.glitch.global/9c8de3fe-0afd-4613-b8a2-ca66167d2a9d/scene.gltf?v=1677528795614"></a-asset-item>
+  </a-assets>
+
+  <a-entity data-aabb-collider-dynamic="true" class="grabbable" id="plot" scale="1 1 1" position="0 1.1 -1.4" graph="xMin: -6.2; xMax: 6.2; yMin: -6.2; yMax: 6.2; x2Min: -6.2; x2Max: 6.2; y2Min: -6.2; y2Max: 6.2; showBoundingLabels: true; showWireframe: false; function: f(x,y) = [x, y, a * cos(y) + b * sin(x)]"></a-entity >
+
+  <a-entity data-aabb-collider-dynamic="true" class="grabbable visible-on-vr" position="0.8 1 -0.3" rotation="0 -70 0" graph-variable-ui="graph: #plot"></a-entity>
+
+  <a-entity gltf-model="#class" position="-11 0.1 -13.45" rotation="0 -90 0" scale="0.8 0.8 0.8"></a-entity>
+  <!-- <a-gltf-model id="class" src="./calculus/models/classroom.glb" position="-11 0.1 -13.45" rotation="0 -90 0" scale="0.8 0.8 0.8"></a-gltf-model> -->
+  
+  <!-- Walls -->
+  <a-entity geometry="primitive: box;" material="color: white" position="0 0 -4" scale="10 10 0.1" static-body></a-entity>
+  <a-entity geometry="primitive: box;" material="color: white" position="0 0 4.4"  scale="10 10 0.1" static-body></a-entity>
+  <a-entity geometry="primitive: box;" material="color: white" position="-3.7 0 0" rotation="0 90 0" scale="10 10 0.1" static-body></a-entity>
+  <a-entity geometry="primitive: box;" material="color: white" position="4.6 0 0" rotation="0 90 0" scale="10 10 0.1" static-body></a-entity>
+
+  <a-entity gltf-model="#exit-sign" position="-1.2 2.22 -1.9" rotation="0 -50 0" scale="1 1 1"
+            material="color: #FFF;"
+            onmouseenter="this.setAttribute('material', 'color', '#555');"
+            onmouseleave="this.setAttribute('material', 'color', '#FFF');"
+            layer="layer1"></a-entity>
+  <a-entity position="0.8 1 0.2" rotation="0 -90 0" scale="1.5 1.5 1.5" data-aabb-collider-dynamic="true" class="grabbable visible-on-vr" >
+    <a-entity my-toggle="title: Bounding Box; active: false" event-set__active="_target: #plot; graph.showBoundingBox: true" event-set__inactive="_target: #plot; graph.showBoundingBox: false" position="0 0 0"></a-entity>
+    <a-entity my-toggle="title: Labels; active: true" event-set__active="_target: #plot; graph.showBoundingLabels: true" event-set__inactive="_target: #plot; graph.showBoundingLabels: false" position="0 0.2 0"></a-entity>
+    <a-entity my-toggle="title: Hide Colors; active: false" event-set__active="_target: #plot; graph.showWireframe: true" event-set__inactive="_target: #plot; graph.showWireframe: false" position="0.25 0 0"></a-entity>
+    <a-entity my-toggle="title: Grid; active: true" event-set__active="_target: #plot; graph.showGrid: true" event-set__inactive="_target: #plot; graph.showGrid: false" position="0.25 0.2 0"></a-entity>
+  </a-entity>
+
+  <a-entity id="functions" position="-3 1.4 0.5" rotation="0 90 0">
+    <a-entity id="function-text" position="0 0.1 0" scale="1.5 1.5 1.5" my-text="color: white"></a-entity>
+    <a-entity id="function2-text" position="0 -0.1 0" scale="1.5 1.5 1.5" my-text="color: white"></a-entity>
+  </a-entity>
+
+  <a-entity light="type: ambient; color: #ffffff; intensity: 1;" position="0 3 -1"></a-entity>
+
+  <a-entity interaction-hands aabb-collider="objects: .grabbable" id="lhand" hand-controls="hand: left; handModelStyle: highPoly" mixin="touch"></a-entity>
+  <a-entity interaction-hands aabb-collider="objects: .grabbable" id="rhand" hand-controls="hand: right; handModelStyle: highPoly" mixin="touch"></a-entity>
+
+  <a-sky color="white"></a-sky>
+
+</a-scene>
+</body>
+
+
+<script>
+  const scene = document.querySelector('a-scene');
+  const vrElements = document.querySelectorAll(".visible-on-vr");
+  const environment = document.querySelector(".environment");
+  scene.addEventListener("enter-vr", () => {
+    if (scene.is('ar-mode')) {
+      environment.setAttribute("visible", "false")
+    }
+  })
+  scene.addEventListener("exit-vr", () => {
+    environment.setAttribute("visible", "true")
+  })
+
+  const plot = document.querySelector("#plot");
+  const displayedFunction = document.querySelector("#function-text");
+  const displayedFunction2 = document.querySelector("#function2-text");
+
+  const graph = plot.components["graph"];
+
+  plot.addEventListener('function-changed', ({detail}) => {
+    if (detail.function)
+      displayedFunction.setAttribute('my-text', {
+        text: `Function${detail.function2 ? ' 1' : ''}: ${detail.function}`
+      })
+    if (detail.function2)
+      displayedFunction2.setAttribute('my-text', {
+        text: `Function 2: ${detail.function2}`
+      })
+  })
+
+  function findGetParameter(parameterName) {
+    var result = null,
+            tmp = [];
+    location.search
+            .substr(1)
+            .split("&")
+            .forEach(function (item) {
+              tmp = item.split("=");
+              if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+            });
+    return result;
+  }
+
+  function cleanString(input) {
+    var output = "";
+    for (var i=0; i<input.length; i++) {
+      if (input.charAt(i) == '‑') {
+        output += '-'
+      } else if (input.charCodeAt(i) <= 127) {
+        output += input.charAt(i);
+      }
+    }
+    return output;
+  }
+
+  const getAllGetParameters = () => {
+    parameters = {};
+    location.search
+            .substr(1)
+            .split("&")
+            .forEach(function (item) {
+              tmp = item.split("=");
+              parameters[tmp[0]] = cleanString(decodeURIComponent(tmp[1]));
+            });
+    return parameters
+  }
+
+  plot.setAttribute('graph', getAllGetParameters());
+
+  window.addEventListener('load', () => {
+    const opacity1 = document.getElementById('function1-opacity-slider')
+    const opacity2 = document.getElementById('function2-opacity-slider')
+    if (getAllGetParameters().function2){
+      let position = opacity1.getAttribute("position")
+      position.y = 0.1
+      opacity1.setAttribute('position', position)
+      opacity2.setAttribute('visible', true)
+    }
+  })
+</script>
+</html>
