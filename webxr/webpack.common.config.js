@@ -5,6 +5,7 @@ module.exports = {
   entry: {
     beam_vr: "./beam/index.js",
     calculus_vr: "./calculus/index.js",
+    sorting_vr: "./sorting/index.js",
   },
   module: {
     rules: [

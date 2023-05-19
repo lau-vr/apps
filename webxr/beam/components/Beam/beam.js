@@ -44,7 +44,6 @@ AFRAME.registerComponent('beam', {
         // this.mesh.rotation.set(165,0,0)
         const type = 'beam';
         this.mesh.userData.type = type; // this sets up interaction group for controllers
-        console.log(this.mesh.geometry.attributes)
         PHYSICS.set_initial_position(this.mesh.geometry.attributes.position.array);
         // Set mesh on entity.
         el.setObject3D('mesh', this.mesh);

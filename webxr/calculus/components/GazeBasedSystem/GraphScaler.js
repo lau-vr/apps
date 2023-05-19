@@ -328,6 +328,7 @@ export function setButtonColorEvents(buttonsArr) {
     });
   });
 }
+
 function updateGraphXY(id) {
   let interval = setInterval(() => {
     let plot = document.getElementById("plot");

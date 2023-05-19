@@ -15,7 +15,6 @@
     function goBack() {
       const params = getAllGetParameters()
       const func2Param = params.function2 ? `&function2=${encodeURIComponent(params.function2)}` : ''
-      console.log(`home.html?function=${encodeURIComponent(params.function)}${func2Param}`)
       window.location.href = `home.html?function=${encodeURIComponent(params.function)}${func2Param}`
     }
   </script>

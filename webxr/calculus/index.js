@@ -24,6 +24,7 @@ require('./components/GazeBasedSystem/GraphScaler')
 
 require('./images/calculus_background.PNG')
 require('./images/bending_background.PNG')
+require('./images/sorting_background.PNG')
 
 import './styles/vr.css';
 
@@ -116,8 +117,6 @@ AFRAME.registerComponent('interaction-hands', {
     },
     onHit: function (evt) {
         const hitEl = evt.detail.el
-        //console.log(evt)
-        console.log("hit start")
         if (!hitEl) { return }
         if (Array.isArray(hitEl)) {
             for (let i = 0, sect; i < hitEl.length; i++) {
@@ -129,7 +128,6 @@ AFRAME.registerComponent('interaction-hands', {
         }
     },
     onHitEnd: function (el) {
-        console.log("hit end")
         this.hoverEnd(el)
     },
     hoverStart: function (hitEl, intersection) {
