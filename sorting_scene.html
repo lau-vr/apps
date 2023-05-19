@@ -1,0 +1,226 @@
+<html>
+  <head>
+    <title>Sorting Visualizer</title>
+  <link rel="shortcut icon" href="favicon.png"><script type="text/javascript" src="sorting_vr.3cbf74f5da76b57c3227.bundle.js"></script></head>
+  <body>
+    <a-scene
+      shadow="type: pcfsoft"
+      physics="driver: local; gravity: 0; friction: 0; restitution: 0;"
+      renderer="antialias: true"
+      raycaster="objects: [my-slider]"
+    >
+      <a-assets>
+        <a-mixin id="touch" class="hands"></a-mixin>
+      </a-assets>
+
+      <a-assets>
+        <a-asset-item
+          id="plus"
+          src="https://cdn.glitch.global/126b4e72-2ac0-4b74-ad2f-4be152694c26/MINUSS%20.glb?v=1675981115171"
+        ></a-asset-item>
+        <a-asset-item
+          id="arrow"
+          src="https://cdn.glitch.global/126b4e72-2ac0-4b74-ad2f-4be152694c26/ARROW%202%20.glb?v=1675978565131"
+        ></a-asset-item>
+        <a-asset-item
+          id="minus"
+          src="https://cdn.glitch.global/126b4e72-2ac0-4b74-ad2f-4be152694c26/pluss.glb?v=1675981125859"
+        ></a-asset-item>
+        <a-asset-item
+          id="teleportationArea"
+          src="https://raw.githubusercontent.com/Youssef140/Assets/main/Assets/magic_ring_-_green/scene.gltf"
+        ></a-asset-item>
+        <a-asset-item
+          id="class"
+          src="https://cdn.glitch.me/9c8de3fe-0afd-4613-b8a2-ca66167d2a9d/CLASSROOM%203.glb"
+        ></a-asset-item>
+      </a-assets>
+
+      <a-entity
+        gltf-model="#class"
+        position="-17.2 0.1 -22.45"
+        rotation="0 -90 0"
+        scale="1.2 1.2 1.2"
+      ></a-entity>
+
+      <!-- <a-gltf-model
+        id="class"
+        src="./calculus/models/classroom.glb"
+        position="-17.2 0.1 -22.45"
+        rotation="0 -90 0"
+        scale="1.2 1.2 1.2"
+      ></a-gltf-model> -->
+
+      <a-entity id="instructions" position="0 2 -4">
+        <a-text
+          position="0 0.3 0"
+          value="Instructions:\n\nHover over a sorting algorithm to visualize it. You can change the number of bars and visualization speed.\n\nor\n\nSwitch to manual solving, select an algorithm, and attempt to sort the bars yourself."
+          align="center"
+          width="3.8"
+          height="1"
+          depth="0"
+        ></a-text>
+        <a-plane
+          id="got-it"
+          material="color: #1AAC97;"
+          position="0 -1 0.1"
+          height="0.5"
+          width="2"
+        >
+          <a-text
+            id="got-it-text"
+            position="0 0 0"
+            value="Got it!"
+            wrap-count="20"
+            align="center"
+            width="1.8"
+          ></a-text>
+        </a-plane>
+        <a-plane material="color: #333;" height="3" width="4"></a-plane>
+      </a-entity>
+
+      <a-entity id="container"></a-entity>
+
+      <a-entity id="sliders" position="1.5 2.25 -0.6" rotation="0 -60 0">
+        <a-entity
+          id="size-slider"
+          my-slider="title: Size; value: 20; min: 3; max: 25;"
+          position="0 0 0"
+          scale="2 2 2"
+        >
+          <a-entity
+            id="size-plus"
+            gltf-model="#plus"
+            scale="0.0055 0.0055 0.0055"
+            rotation="90 0 0"
+            position="0.05 -0.14 0"
+          ></a-entity>
+          <a-entity
+            id="size-minus"
+            gltf-model="#minus"
+            scale="0.0055 0.0055 0.0055"
+            rotation="90 0 0"
+            position="-0.38 -0.14 0"
+          ></a-entity>
+        </a-entity>
+        <a-entity
+          id="speed-slider"
+          my-slider="title: Speed; value: 5; min: 1; max: 10;"
+          position="0 -0.8 0"
+          scale="2 2 2"
+        >
+          <a-entity
+            id="speed-plus"
+            gltf-model="#plus"
+            scale="0.0055 0.0055 0.0055"
+            rotation="90 0 0"
+            position="0.05 -0.14 0"
+          ></a-entity>
+          <a-entity
+            id="speed-minus"
+            gltf-model="#minus"
+            scale="0.0055 0.0055 0.0055"
+            rotation="90 0 0"
+            position="-0.38 -0.14 0"
+          ></a-entity>
+        </a-entity>
+      </a-entity>
+
+      <a-entity
+        id="main text"
+        text="value: Sorting Visualizer!; align: center; width: 5"
+        position="-2.9 3.9 -2"
+        rotation="0 50 0"
+      ></a-entity>
+
+      <a-entity>
+        <a-entity id="my-dropdown" position="-2.9 1.9 -2" rotation="0 50 0">
+          <a-entity position="0 1.2 0">
+            <a-text
+              id="mode-text"
+              value="Switch to Manual Solving"
+              align="center"
+              width="3"
+            ></a-text>
+            <a-plane
+              id="manualSolve"
+              material="color: #333; opacity: 0.9;"
+              height="0.4"
+              width="1.7"
+            ></a-plane>
+          </a-entity>
+          <a-entity position="0 0.8 0">
+            <a-text value="New Array" align="center" width="3"></a-text>
+            <a-plane
+              id="newArray"
+              material="color: #333; opacity: 0.9;"
+              height="0.4"
+              width="1.7"
+            ></a-plane>
+          </a-entity>
+          <a-entity position="0 0.4 0">
+            <a-text value="Bubble Sort" align="center" width="3"></a-text>
+            <a-plane
+              id="bubbleSort"
+              class="sortButton"
+              material="color: #333; opacity: 0.9;"
+              height="0.4"
+              width="1.7"
+            ></a-plane>
+          </a-entity>
+          <a-entity position="0 0 0">
+            <a-text value="Insertion Sort" align="center" width="3"></a-text>
+            <a-plane
+              id="insertionSort"
+              class="sortButton"
+              material="color: #333; opacity: 0.9;"
+              height="0.4"
+              width="1.7"
+            ></a-plane>
+          </a-entity>
+          <a-entity id="heapBg" position="0 -0.4 0">
+            <a-text value="Heap Sort" align="center" width="3"></a-text>
+            <a-plane
+              id="heapSort"
+              class="sortButton"
+              material="color: #333; opacity: 0.9;"
+              height="0.4"
+              width="1.7"
+            ></a-plane>
+          </a-entity>
+          <a-entity id="mergeBg" position="0 -0.8 0">
+            <a-text value="Merge Sort" align="center" width="3"></a-text>
+            <a-plane
+              id="mergeSort"
+              class="sortButton"
+              material="color: #333; opacity: 0.9;"
+              height="0.4"
+              width="1.7"
+            ></a-plane>
+          </a-entity>
+          <a-entity id="selectBg" position="0 -1.2 0">
+            <a-text value="Selection Sort" align="center" width="3"></a-text>
+            <a-plane
+              id="selectionSort"
+              class="sortButton"
+              material="color: #333; opacity: 0.9;"
+              height="0.4"
+              width="1.7"
+            ></a-plane>
+          </a-entity>
+          <a-entity id="quickBg" position="0 -1.6 0">
+            <a-text value="Quick Sort" align="center" width="3"></a-text>
+            <a-plane
+              id="quickSort"
+              class="sortButton"
+              material="color: #333; opacity: 0.9;"
+              height="0.4"
+              width="1.7"
+              events="click: handleClick;"
+            ></a-plane>
+          </a-entity>
+        </a-entity>
+      </a-entity>
+    </a-scene>
+  </body>
+</html>

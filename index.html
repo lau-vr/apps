@@ -29,14 +29,21 @@
       }
       #calculus-card {
         background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
-          url('images/calculus_background.PNG');
+          url("images/calculus_background.PNG");
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
       }
       #bending-card {
         background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
-          url('images/bending_background.PNG');
+          url("images/bending_background.PNG");
+        background-position: top;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+      #sorting-card {
+        background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+          url("images/sorting_background.PNG");
         background-position: top;
         background-repeat: no-repeat;
         background-size: cover;
@@ -91,7 +98,7 @@
           />
         </div>
         <div class="row">
-          <p class="col-12 text-white fs-1 text-center my-4 my-md-4 my-lg-0">
+          <p class="col-12 text-white fs-1 text-center my-4 my-md-4 my-lg-2">
             Education in VR
           </p>
         </div>
@@ -116,7 +123,7 @@
           </p>
         </div>
         <div
-          class="row justify-content-center align-items-center flex-column flex-md-row"
+          class="row justify-content-center align-items-center flex-column flex-md-row my-lg-3"
         >
           <div
             class="col-8 col-md-4 col-lg-3 project-card"
@@ -164,6 +171,28 @@
             </div>
           </div>
 
+          <div
+            class="col-8 col-md-4 col-lg-3 project-card"
+            onclick="window.location.href='sorting_scene.html'"
+          >
+            <div id="sorting-card" class="project-header">
+              <p class="text-primary text-center fs-4 mx-3 mx-md-0 mx-xl-5">
+                Sorting Algorithm Visualizer
+              </p>
+            </div>
+
+            <div class="project-content">
+              <p class="text-center text-white m-0 d-none d-xl-block fs-5">
+                Visualize and solve sorting algorithm in real time.
+              </p>
+              <p
+                class="text-center text-white m-0 d-block d-xl-none fs-6 mx-3 mx-md-0"
+              >
+                Visualize and solve sorting algorithm in real time.
+              </p>
+            </div>
+          </div>
+
           <div class="col-8 col-md-4 col-lg-3 project-card">
             <div class="project-header">
               <p class="text-primary text-center fs-4 mx-3 mx-md-0 mx-xl-5">
@@ -173,12 +202,14 @@
 
             <div class="project-content">
               <p class="text-center text-white m-0 d-none d-xl-block fs-5">
-                Click to download an Android app to visualize and inspect a 3D modeled car engine.
+                Click to download an Android app to visualize and inspect a 3D
+                modeled car engine.
               </p>
               <p
                 class="text-center text-white m-0 d-block d-xl-none fs-6 mx-3 mx-md-0"
               >
-                Click to download an Android app to visualize and inspect a 3D modeled car engine.
+                Click to download an Android app to visualize and inspect a 3D
+                modeled car engine.
               </p>
             </div>
           </div>
