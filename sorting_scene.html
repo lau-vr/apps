@@ -1,7 +1,7 @@
 <html>
   <head>
     <title>Sorting Visualizer</title>
-  <link rel="shortcut icon" href="favicon.png"><script type="text/javascript" src="sorting_vr.ee030308377a015e262c.bundle.js"></script></head>
+  <link rel="shortcut icon" href="favicon.png"><script type="text/javascript" src="sorting_vr.30de118c735d63fcd4bb.bundle.js"></script></head>
   <body>
     <a-scene
       shadow="type: pcfsoft"
@@ -129,12 +129,25 @@
       <a-entity
         id="main text"
         text="value: Sorting Visualizer!; align: center; width: 5"
-        position="-2.9 3.9 -2"
+        position="-2.9 4 -2"
         rotation="0 50 0"
       ></a-entity>
 
       <a-entity>
-        <a-entity id="my-dropdown" position="-2.9 1.9 -2" rotation="0 50 0">
+        <a-entity id="my-dropdown" position="-2.9 2.4 -2" rotation="0 50 0">
+          <a-entity id="alg-desc" position="-1.7 0 0">
+            <a-text
+              id="alg-desc-text"
+              position="0 0 0"
+              value="Hover over an algorithm to view its description."
+              align="center"
+              wrap-count="20"
+              width="1.4"
+              height="1.2"
+              depth="0"
+            ></a-text>
+            <a-plane material="color: #333;" height="1.5" width="1.5"></a-plane>
+          </a-entity>
           <a-entity position="0 1.2 0">
             <a-text
               id="mode-text"
@@ -158,7 +171,7 @@
               width="1.7"
             ></a-plane>
           </a-entity>
-          <a-entity position="0 0.4 0">
+          <a-entity id="bubbleBg" position="0 0.4 0">
             <a-text value="Bubble Sort" align="center" width="3"></a-text>
             <a-plane
               id="bubbleSort"
@@ -168,7 +181,7 @@
               width="1.7"
             ></a-plane>
           </a-entity>
-          <a-entity position="0 0 0">
+          <a-entity id="insertionBg" position="0 0 0">
             <a-text value="Insertion Sort" align="center" width="3"></a-text>
             <a-plane
               id="insertionSort"
@@ -198,7 +211,7 @@
               width="1.7"
             ></a-plane>
           </a-entity>
-          <a-entity id="selectBg" position="0 -1.2 0">
+          <a-entity id="selectionBg" position="0 -1.2 0">
             <a-text value="Selection Sort" align="center" width="3"></a-text>
             <a-plane
               id="selectionSort"
