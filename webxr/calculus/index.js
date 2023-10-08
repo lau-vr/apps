@@ -25,6 +25,7 @@ require('./components/GazeBasedSystem/GraphScaler')
 require('./images/calculus_background.PNG')
 require('./images/bending_background.PNG')
 require('./images/sorting_background.PNG')
+require('./images/crystallographic_background.PNG')
 
 import './styles/vr.css';
 
