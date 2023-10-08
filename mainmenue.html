@@ -1,0 +1,189 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.3.1/dist/aframe-environment-component.min.js"></script>
+    
+    <meta name="description" content="mainmenue2">
+    <script src= "index.js"></script>
+    
+    
+    
+  <link rel="shortcut icon" href="favicon.png"><script type="text/javascript" src="crystallographic_vr.a7967e26f6f3d050658f.bundle.js"></script></head>
+  
+  
+  <body style="margin : 0px; overflow: hidden">
+     
+    
+    <a-scene environment="preset:yavapai; lighting: none; skyType:atmosphere"  >
+    <a-assets>         
+      <audio
+               id="hover"
+               src="https://cdn.glitch.global/b219fdd4-33d6-404f-9722-66b827ed821a/hover.mp3?v=1654333972335"
+               preload="auto"></audio>
+      
+            <audio
+               id="dooropen"
+               src="https://cdn.glitch.global/b219fdd4-33d6-404f-9722-66b827ed821a/mixkit-creaky-door-open-195.wav?v=1654334563867"
+               preload="auto"></audio>
+            <audio
+               id="doorclose"
+               src="https://cdn.glitch.global/b219fdd4-33d6-404f-9722-66b827ed821a/mixkit-creaky-closing-wood-door-189.wav?v=1654334675319"
+               preload="auto"></audio>      
+      
+  </a-assets>
+      
+      
+      <a-entity light="intensity: 0.3; type: ambient;"></a-entity>
+        
+        <a-light type="directional" position="0 6.8 0" rotation="-90 0 0" target="#directionaltarget" intensity="1">
+          <a-entity id="directionaltarget" position="0 8.466 -1"></a-entity>
+        </a-light>
+      
+     
+      <a-camera id= "cam" position= "0 1.6 0"   > 
+       <a-entity
+           cursor="fuseTimeout: 500"
+          position="0 0 -1"
+          geometry="primitive: ring; radiusInner: 0.017; radiusOuter: 0.03"
+          material="color: black; shader: flat; opacity:0.5"
+          animation__click="property: scale; 
+                              startEvents: click; 
+                              easing: easeInCubic; 
+                              dur: 150; 
+                              from: 0.1 0.1 0.1; to: 1 1 1"
+        >
+        </a-entity></a-camera>
+      
+      
+      <a-box id="bcc" color = "blue" opacity ="0" position= "0 2.3 -5" scale = "2 2 2" animation__rotate="property:rotation; from :0 0 0; to: 0 360 0; easing:easeInOutSine; dur:10000; loop:true " sound="src: #hover; on: mouseenter;volume:1">
+      <a-entity  gltf-model="https://cdn.glitch.global/b219fdd4-33d6-404f-9722-66b827ed821a/BCC%20real.gltf?v=1653946563758" ></a-entity></a-box>
+      
+       <a-box   id="fcc" color = "blue" opacity ="0" position= "-4 2.3 -5" scale = "2 2 2" animation__rotate="property:rotation; from :0 0 0; to: 0 360 0; easing:easeInOutSine; dur:10000; loop:true " sound="src: #hover; on: mouseenter;volume:1">
+      <a-entity  gltf-model="https://cdn.glitch.global/b219fdd4-33d6-404f-9722-66b827ed821a/FCC%20real.gltf?v=1654004293060"  ></a-entity></a-box>
+      
+      <a-box  id="hcp" color = "blue" opacity ="0" position= "4 2.3 -5" scale = "3.3 3.3 3.3" animation__rotate="property:rotation; from :0 0 0; to: 0 360 0; easing:easeInOutSine; dur:10000; loop:true ">
+      <a-entity  gltf-model="https://cdn.glitch.global/b219fdd4-33d6-404f-9722-66b827ed821a/HCC%20real.gltf?v=1654007368523"  ></a-entity></a-box>
+      
+      <a-entity gltf-model="https://cdn.glitch.global/b219fdd4-33d6-404f-9722-66b827ed821a/fcc.gltf?v=1654019119450" position= "-4 4 -5" scale="20 20 10"  ></a-entity>  
+      
+      <a-entity  gltf-model="https://cdn.glitch.global/b219fdd4-33d6-404f-9722-66b827ed821a/bcc2.gltf?v=1654018953628"  position= "0 4 -5" scale="20 20 10"  ></a-entity>  
+      <a-entity  gltf-model="https://cdn.glitch.global/b219fdd4-33d6-404f-9722-66b827ed821a/hcp.gltf?v=1654018278528"  position= "4 4 -5" scale="20 20 10"  ></a-entity> 
+      
+    <a-entity  gltf-model="https://cdn.glitch.global/b219fdd4-33d6-404f-9722-66b827ed821a/cp1.gltf?v=1654019466430"  position= "0 0.5 -7" scale="26 26 9"  ></a-entity>  
+  
+      
+      <a-entity position="4 2 -8" >
+      
+              <a-entity id="door" gltf-model="scene.gltf"  position= "-15 1 9" scale="0.02 0.03 0.03" shadow="cast:true" rotation="0 190 0" 
+                event-set__enter="_event:mouseenter; animation__scale.enabled : true;animation__descale.enabled : false;"
+                event-set__leave="_event:mouseleave; animation__descale.enabled : true; animation__scale.enabled : false"                
+                animation__scale="property:scale;from: 0.02 0.03 0.03; to : 0.021 0.031 0.031; enabled:false; dur:100"
+                animation__descale="property:scale;from: 0.021 0.031 0.031; to : 0.02 0.03 0.03;enabled:false;dur:100 "
+                
+                event-set__click1="_event:click;_target:#main;animation__scale.enabled:true; animation__descale.enabled:false"
+                        sound="src: #hover; on: mouseenter;volume:1"
+                         sound__1="src: #dooropen; on: click;volume:1"
+               ></a-entity>  
+      
+        <a-light type="spot" color="#F4EA56" angle="-35"
+      position="-4 2 11"
+      target="#door" ></a-light>
+      
+     
+      <a-plane
+        id="main"
+        color="white"
+        opacity="0.5"
+        position="-11 1.3 8.5"
+        scale="0 0 0"
+        animation__scale="property:scale; from: 0 0 0; to: 5.5 6 5.5; dur:2000; enabled:false"
+        animation__descale="property:scale; from: 5.5 6 5.5; to: 0 0 0;dur:2000; enabled:false"       
+        rotation="0 100 0"  
+      >
+       <a-entity
+                    
+            text="value: Main Menu ;wrapCount:11; align:center;color:black"
+            scale="0.5 0.5 0.5"
+            position="0 0.4 0.011"></a-entity>
+
+        <a-entity id="choosecourse"  sound="src: #hover; on: mouseenter;volume:1" 
+                   sound__1="src: #dooropen; on: click;volume:1"
+                  event-set__scale="_event: mouseenter;_target:#a1; animation__scale.enabled:true; animation__descale.enabled:false"
+                  event-set__descale="_event: mouseleave; _target:#a1; animation__descale.enabled:true; animation__scale.enabled:false">
+          <a-entity
+                    
+            text="value: Another Course ;wrapCount:11; align:center;"
+            scale="0.4 0.4 0.4"
+            position="0 0.15 0.011"
+            id="a1"        
+            animation__scale="property:scale; from: 0.4 0.4 0.4; to: 0.5 0.5 0.5; dur:100; enabled:false"
+                  animation__descale="property:scale; from: 0.5 0.5 0.5; to: 0.4 0.4 0.4; dur:100; enabled:false"        
+          ></a-entity>
+
+          <a-box
+            height="0.18"
+            depth=" 0.01"
+            width="0.8"
+            color="black"
+            position="0 0.15 0"
+          ></a-box
+        ></a-entity>
+
+        <a-entity id="logout" sound="src: #hover; on: mouseenter;volume:1"
+                   sound__1="src: #dooropen; on: click;volume:1"
+                  event-set__scale="_event: mouseenter;_target:#a2; animation__scale.enabled:true; animation__descale.enabled:false"
+                  event-set__descale="_event: mouseleave; _target:#a2; animation__descale.enabled:true; animation__scale.enabled:false">
+          <a-entity
+            text="value: LogOUT ;wrapCount:11; align:center;"
+            scale="0.4 0.4 0.4"
+            position="0 -0.05 0.011"
+            id="a2"        
+            animation__scale="property:scale; from: 0.4 0.4 0.4; to: 0.5 0.5 0.5; dur:100; enabled:false"
+                  animation__descale="property:scale; from: 0.5 0.5 0.5; to: 0.4 0.4 0.4; dur:100; enabled:false"         
+          ></a-entity>
+
+          <a-box
+            height="0.18"
+            depth=" 0.01"
+            width="0.8"
+            color="black"
+            position="0 -0.05 0"
+          ></a-box
+        ></a-entity>
+        
+        
+         <a-entity id="cancel" sound="src: #hover; on: mouseenter;volume:1" sound__1="src: #doorclose; on: click;volume:1"
+                   event-set__scale="_event: mouseenter;_target:#a4; animation__scale.enabled:true; animation__descale.enabled:false"
+                  event-set__descale="_event: mouseleave; _target:#a4; animation__descale.enabled:true; animation__scale.enabled:false"
+                   event-set__click="_event: click;_target:#main; animation__descale.enabled:true; animation__scale.enabled:false">
+          <a-entity
+           text="value: Cancel ;wrapCount:11; align:center;"
+            scale="0.4 0.4 0.4"
+            position="0 -0.25 0.011"
+             id="a4"        
+            animation__scale="property:scale; from: 0.4 0.4 0.4; to: 0.5 0.5 0.5; dur:100; enabled:false"
+                  animation__descale="property:scale; from: 0.5 0.5 0.5; to: 0.4 0.4 0.4; dur:100; enabled:false" 
+                 
+          ></a-entity>
+
+          <a-box
+            height="0.18"
+            depth=" 0.01"
+            width="0.8"
+            color="black"
+            position="0 -0.25 0"
+          ></a-box
+        ></a-entity>
+
+      </a-plane>
+    </a-entity>
+      
+    </a-scene>
+    
+    
+  </body>
+</html>

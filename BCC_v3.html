@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.3.1/dist/aframe-environment-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/webvr-polyfill@latest/build/webvr-polyfill.js"></script>
+
+    <script src="adjustLocationBCC.js"></script>
+    
+    
+      
+  <link rel="shortcut icon" href="favicon.png"><script type="text/javascript" src="crystallographic_BCC.f468ea2aa7de77f214ce.bundle.js"></script></head>
+  <body>
+    
+    <a-scene device-orientation-permission-ui="enabled: true">
+      <a-assets>
+      <audio
+               id="hover"
+               src="https://cdn.glitch.global/b219fdd4-33d6-404f-9722-66b827ed821a/hover.mp3?v=1654333972335"
+               preload="auto"></audio>
+      
+            <audio
+               id="dooropen"
+               src="https://cdn.glitch.global/b219fdd4-33d6-404f-9722-66b827ed821a/mixkit-creaky-door-open-195.wav?v=1654334563867"
+               preload="auto"></audio>
+            <audio
+               id="doorclose"
+               src="https://cdn.glitch.global/b219fdd4-33d6-404f-9722-66b827ed821a/mixkit-creaky-closing-wood-door-189.wav?v=1654334675319"
+               preload="auto"></audio>  
+            <audio
+               id="swipe"
+               src="https://cdn.glitch.global/b219fdd4-33d6-404f-9722-66b827ed821a/swipe.mp3?v=1654333972688"
+               preload="auto"></audio>  
+            <audio
+                   id="tick"
+                   src="https://cdn.glitch.global/b219fdd4-33d6-404f-9722-66b827ed821a/CEPW748-clock-tick%20(mp3cut.net).mp3?v=1654335631435"
+                   preload="auto"
+                   ></audio>
+      <audio
+             id="success"
+             src="https://cdn.glitch.global/b219fdd4-33d6-404f-9722-66b827ed821a/mixkit-magic-sweep-game-trophy-257.mp3?v=1654337422271"
+             preload="auto"></audio>
+    </a-assets>
+      
+      
+      
+      
+      
+      <a-entity laser-controls="hand: right"></a-entity>
+      <a-entity position="2.5 1.6 10">
+      <a-camera id="cam" position="" wasd-controls="enabled:false">  <a-entity
+          cursor="fuseTimeout: 500"
+          position="0 0 -1"
+          geometry="primitive: ring; radiusInner: 0.017; radiusOuter: 0.03"
+          material="color: white; shader: flat; opacity:0.5"
+          animation__click="property: scale; 
+                              startEvents: click; 
+                              easing: easeInCubic; 
+                              dur: 150; 
+                              from: 0.1 0.1 0.1; to: 1 1 1"
+        >
+        </a-entity></a-camera>
+      </a-entity>
+        
+            <a-entity position="0 -2.7 0" environment="preset:egypt ;dressing:none; playArea:1.2;ground:hills; lighting: none; groundColor: black;groundTexture: none; grid:none">
+        <a-entity light="intensity: 0.27; type: ambient;"></a-entity>
+        
+        <a-light type="directional" position="0 21.697 34.447" rotation="-90 0 0" target="#directionaltarget" intensity="0.8">
+          <a-entity id="directionaltarget" position="0 50.534 -19.584"></a-entity>
+        </a-light>
+      </a-entity>
+
+      <a-box
+        id="box"
+        position="2.5 2.5 2.5"
+        height="5"
+        width="5"
+        depth="5"
+        animation__rotate="property:rotation; from: 0 0 0; to : 0 360 0; loop:true; easing:easeInOutSine; dur:50000"
+        opacity="0" color="white"
+        side="double"
+        scale="0 0 0"
+        animation__opacity="property: opacity; from:0; to:0.2; delay: 1450 ; enabled:false"
+        animation__scale="property: scale; from: 0 0 0; to: 1 1 1; dur: 1500; enabled:false"
+      >
+        <a-entity
+          id="lines"
+          visible="false"
+          glow="side: front; scale:1.3; c: 1; p: 1.3; color: #FF00FF;"
+          animation__visible="property: visible; from:false; to:true; delay: 1300 ; enabled:false"
+                  
+          line="start: -2.5 -2.5 -2.5; end: -2.5 -2.5 2.5; color: #FF3131; lineWidth:20"
+          line__2="start: -2.5 -2.5 -2.5; end: -2.5 2.5 -2.5; color: #39FF14"
+          line__3="start:-2.5 -2.5 -2.5; end: 2.5 -2.5 -2.5; color: #1F51FF"
+          line__7="start: -2.5 2.5 -2.5; end: -2.5 2.5 2.5; color: white; opacity:0.5"
+          line__9="start: -2.5 2.5 -2.5; end: 2.5 2.5 -2.5; color: white; opacity:0.5"
+          line__11="start:-2.5 -2.5 2.5; end: -2.5 2.5 2.5; color: white; opacity:0.5"
+          line__12="start:-2.5 -2.5 2.5; end: 2.5 -2.5 2.5; color: white; opacity:0.5"
+          line__13="start: 2.5 2.5 2.5; end: 2.5 2.5 -2.5; color: white; opacity:0.5"
+          line__15="start:2.5 -2.5 -2.5; end: 2.5 2.5 -2.5; color: white;opacity:0.5"
+          line__16="start:2.5 -2.5 -2.5; end: 2.5 -2.5 2.5; color: white;opacity:0.5"
+          line__17="start:2.5 -2.5 -2.5; end: 2.5 -2.5 -2.5; color: white;opacity:0.5"
+          line__19="start:2.5 -2.5 2.5; end: 2.5 2.5 2.5; color: white;opacity:0.5"
+          line__20="start:2.5 -2.5 2.5; end: 2.5 -2.5 -2.5; color: white;opacity:0.5"
+          line__23="start:-2.5 2.5 2.5; end: 2.5 2.5 2.5; color: white;opacity:0.5"
+                  
+          line__a="start: -2.501 -2.501 -2.501; end: -2.501 -2.501 2.501; color: #FF3131; "
+          line__b="start: -2.501 -2.501 -2.501; end: -2.501 2.501 -2.501; color: #39FF14"
+          line__c="start:-2.501 -2.501 -2.501; end: 2.501 -2.501 -2.501; color: #1F51FF"     
+          line__a1="start: -2.499 -2.499 -2.499; end: -2.499 -2.499 2.499; color: #FF3131; "
+          line__b1="start: -2.499 -2.499 -2.499; end: -2.499 2.499 -2.499; color: #39FF14"
+          line__c1="start:-2.499 -2.499 -2.499; end: 2.499 -2.499 -2.499; color: #1F51FF" 
+          line__a2="start: -2.502 -2.502 -2.502; end: -2.502 -2.502 2.502; color: #FF3131; "
+          line__b2="start: -2.502 -2.502 -2.502; end: -2.502 2.502 -2.502; color: #39FF14"
+          line__c2="start:-2.502 -2.502 -2.502; end: 2.502 -2.502 -2.502; color: #1F51FF"     
+          line__a3="start: -2.498 -2.498 -2.498; end: -2.498 -2.498 2.498; color: #FF3131; "
+          line__b3="start: -2.498 -2.498 -2.498; end: -2.498 2.498 -2.498; color: #39FF14"
+          line__c3="start:-2.498 -2.498 -2.498; end: 2.498 -2.498 -2.4998; color: #1F51FF"  
+          line__a4="start:-2.503 -2.503 -2.503; end: -2.503 -2.503  2.503; color: #FF3131; "
+          line__b4="start:-2.503 -2.503 -2.503; end: -2.503  2.503 -2.503; color: #39FF14"
+          line__c4="start:-2.503 -2.503 -2.503; end:  2.503 -2.503 -2.503; color: #1F51FF"     
+          line__a5="start:-2.497 -2.497 -2.497; end: -2.497 -2.497  2.497; color: #FF3131; "
+          line__b5="start:-2.497 -2.497 -2.497; end: -2.497  2.497 -2.497; color: #39FF14"
+          line__c5="start:-2.497 -2.497 -2.497; end:  2.497 -2.497 -2.497; color: #1F51FF"        
+                  
+        ></a-entity>
+        <a-entity id="arrows"   animation__visible="property: visible; from:false; to:true; delay: 1300 ; enabled:false" visible="false">
+        <a-cone  color="#39FF14" radius-bottom="0.15" radius-top="0" height="0.22" position="-2.5 0 -2.5" segments-radial="4" rotation="0 45 0"></a-cone>
+        
+         <a-cone  color="#FF3131" radius-bottom="0.15" radius-top="0" height="0.22" position="-2.5 -2.5 0"       segments-radial="4" rotation="90 0 0"></a-cone> 
+        
+          <a-cone  color="#1F51FF" radius-bottom="0.15" radius-top="0" height="0.22" position="0 -2.5 -2.5"       segments-radial="4" rotation="90 0 -90"></a-cone> </a-entity>
+        <a-entity id="spheres">
+          <a-sphere
+            position="0 0 0"
+            radius="0.5"
+            color="#00C8FF"
+            opacity="0.6"
+          ></a-sphere>
+          <a-sphere
+            position="-2.5 -2.5 2.5"
+            radius="0.5"
+            color="#00C8FF"
+            opacity="0.6"
+          ></a-sphere>
+          <a-sphere
+            position="-2.5 -2.5 -2.5"
+            radius="0.5"
+            color="#00C8FF"
+            opacity="0.6"
+          ></a-sphere>
+          <a-sphere
+            position="-2.5 2.5 2.5"
+            radius="0.5"
+            color="#00C8FF"
+            opacity="0.6"
+          ></a-sphere>
+          <a-sphere
+            position="-2.5 2.5 -2.5"
+            radius="0.5"
+            color="#00C8FF"
+            opacity="0.6"
+          ></a-sphere>
+          <a-sphere
+            position="2.5 2.5 2.5"
+            radius="0.5"
+            color="#00C8FF"
+            opacity="0.6"
+          ></a-sphere>
+          <a-sphere
+            position="2.5 2.5 -2.5"
+            radius="0.5"
+            color="#00C8FF"
+            opacity="0.6"
+          ></a-sphere>
+          <a-sphere
+            position="2.5 -2.5 2.5"
+            radius="0.5"
+            color="#00C8FF"
+            opacity="0.6"
+          ></a-sphere>
+          <a-sphere
+            position="2.5 -2.5 -2.5"
+            radius="0.5"
+            color="#00C8FF"
+            opacity="0.6"
+          ></a-sphere>
+        </a-entity>
+
+        <a-entity position="-2.5 -2.5 -2.5" id="myPlane">
+          <a-triangle
+            id="triangle1"
+            vertex-a=" 0 0 0"
+            vertex-b=" 0 0 0"
+            vertex-c=" 0 0 0"
+            material="side:double; color: #FFF01F; opacity:0.7"
+          ></a-triangle>
+          <a-triangle
+            id="triangle2"
+            vertex-a=" 0 0 0"
+            vertex-b=" 0 0 0"
+            vertex-c=" 0 0 0"
+            material="side:double; color: #FFF01F; opacity:0.7"
+          ></a-triangle>
+        </a-entity>
+      </a-box>
+
+      <a-entity
+        visible="false"
+        look-at="#cam"
+        id="text"
+        text="value:0  0  0;wrapCount:7; align:center; color:black"
+        geometry="primitive:plane; color:black ;height:0.35; width: 0.8"
+        scale="4 3 1 "
+        position="11.000 .1 5.000"
+      ></a-entity>
+
+   <!--   <a-entity
+        look-at="#cam"
+        text="value:Take Quiz;wrapCount:10; align:center; color:white"
+        geometry="primitive:plane; color:black ;height:0.35; width: 1"
+        scale="7 7 1 "
+        position="-15 5 5"
+      ></a-entity>
+
+      <a-entity
+        look-at="#cam"
+        text="value:Back to home;wrapCount:10; align:center; color:white"
+        geometry="primitive:plane; color:black ;height:0.35; width: 1"
+        scale="7 7 1 "
+        position="-15 2 5"
+      ></a-entity>
+
+      <a-entity
+        look-at="#cam"
+        text="value:LOG OUT;wrapCount:10; align:center; color:white"
+        geometry="primitive:plane; color:black ;height:0.35; width: 1"
+        scale="7 7 1 "
+        position="-15 -1 5"
+      ></a-entity>
+-->  
+      <a-entity >
+      <a-box
+        position="2.5 1.8 2.5"
+        scale="6 6 6"
+        animation__rotate="property:rotation; from: 0 0 0; to : 360 360 360; loop:true; easing:easeInOutSine; dur:50000"
+        opacity="0"
+        side="double"
+             id="m1"
+        event-set__enter="_event: mouseenter; scale: 6.5 6.5 6.5"
+        event-set__leave="_event:mouseleave;scale: 6 6 6"
+        event-set__click1="_event: click; animation__scale.enabled:true"
+        event-set__click2="_event: click; _target: #box; animation__scale.enabled:true"
+        event-set__clisck3="_event: click; _target: #lines; animation__visible.enabled:true"
+        event-set__cliscka="_event: click; _target: #arrows; animation__visible.enabled:true"     
+        event-set__clisck4="_event: click; _target: #box; animation__opacity.enabled:true"
+        event-set__click5="_event:click; _target: #numpad2; animation__scale.enabled:true"
+        animation__scale="property: scale; from: 6.5 6.5 6.5; to: 0 0 0; dur: 1500; enabled:false"
+        event-set__click6="_event: click;_target: #text; visible :true"
+        event-set__click7="_event: click;_target:#BCC; animation__scale.enabled:true; animation__position.enabled:true"
+             
+             
+             event-set__enter2="_event: mouseenter; scale: 6.5 6.5 6.5"
+        event-set__leave2="_event:mouseleave;scale: 6 6 6"
+        event-set__click12="_event: click;_target:#m2;animation__scale.enabled:true"
+        event-set__click22="_event: click; _target: #box2; animation__scale.enabled:true"
+        event-set__clisck32="_event: click; _target: #lines2; animation__visible.enabled:true"
+        event-set__cliscka2="_event: click; _target: #arrows2; animation__visible.enabled:true"     
+        event-set__clisck42="_event: click; _target: #box2; animation__opacity.enabled:true"
+        event-set__click52="_event:click; _target: #numpad; animation__scale.enabled:true"
+        animation__scale2="property: scale; from: 6.5 6.5 6.5; to: 0 0 0; dur: 1500; enabled:false"
+        event-set__click62="_event: click;_target: #text2; visible :true"
+        event-set__click72="_event: click;_target:#BCC2; animation__scale.enabled:true; animation__position.enabled:true"
+             sound="src: #swipe; on: click;volume:2"
+      >
+        <a-entity
+          gltf-model="https://cdn.glitch.global/b219fdd4-33d6-404f-9722-66b827ed821a/BCC%20real.gltf?v=1653946563758"
+        ></a-entity
+      ></a-box></a-entity>
+
+     
+
+
+      <a-plane
+        id="numpad2"
+        color="white"
+        opacity="0.5"
+        position="-7 3.3 15"
+        scale="0 0 0"
+        animation__scale="property:scale; from: 0 0 0; to: 7 5 7; enabled:false"
+        look-at="#cam"
+      >
+        <a-entity
+          id="input"
+          text="value: 0 0 0  ;wrapCount:10; align:center;"
+          scale="0.6 0.6 0.6"
+          position="0 0.7 0.011"
+        ></a-entity>
+        <a-box
+          height="0.25"
+          depth=" 0.01"
+          width="1"
+          color="white"
+          opacity="0.6"
+          position="0 0.7 0"
+        ></a-box>
+
+        <a-entity id="n8" sound="src: #tick; on: click;volume:5">
+          <a-entity
+            text="value: 8 ;wrapCount:1; align:center;"
+            scale="0.13 0.13 0.13"
+            position="-0.07 0.3 0.011"
+          ></a-entity>
+
+          <a-box
+            height="0.25"
+            depth=" 0.01"
+            width="0.2"
+            color="black"
+            position="-0.07 0.3 0"
+          ></a-box
+        ></a-entity>
+
+        <a-entity id="n5" sound="src: #tick; on: click;volume:5">
+          <a-entity
+            text="value: 5 ;wrapCount:1; align:center;"
+            scale="0.13 0.13 0.13"
+            position="-0.07 0 0.011"
+          ></a-entity>
+
+          <a-box
+            height="0.25"
+            depth=" 0.01"
+            width="0.2"
+            color="black"
+            position="-0.07 0 0"
+          ></a-box
+        ></a-entity>
+
+        <a-entity id="n2" sound="src: #tick; on: click;volume:5">
+          <a-entity
+            text="value: 2 ;wrapCount:1; align:center;"
+            scale="0.13 0.13 0.13"
+            position="-0.07 -0.3 0.011"
+          ></a-entity>
+          <a-box
+            height="0.25"
+            depth=" 0.01"
+            width="0.2"
+            color="black"
+            position="-0.07 -0.3 0"
+          ></a-box
+        ></a-entity>
+
+        <a-entity id="n7" sound="src: #tick; on: click;volume:5">
+          <a-entity
+            text="value: 7 ;wrapCount:1; align:center;"
+            scale="0.13 0.13 0.13"
+            position="-0.3 0.3 0.011"
+          ></a-entity>
+          <a-box
+            height="0.25"
+            depth=" 0.01"
+            width="0.2"
+            color="black"
+            position="-0.3 0.3 0"
+          ></a-box
+        ></a-entity>
+
+        <a-entity id="n4" sound="src: #tick; on: click;volume:5">
+          <a-entity
+            text="value: 4 ;wrapCount:1; align:center;"
+            scale="0.13 0.13 0.13"
+            position="-0.3 0 0.011"
+          ></a-entity>
+          <a-box
+            height="0.25"
+            depth=" 0.01"
+            width="0.2"
+            color="black"
+            position="-0.3 0 0"
+          ></a-box>
+        </a-entity>
+
+        <a-entity id="n1" sound="src: #tick; on: click;volume:5">
+          <a-entity
+            text="value: 1 ;wrapCount:1; align:center;"
+            scale="0.13 0.13 0.13"
+            position="-0.3 -0.3 0.011"
+          ></a-entity>
+          <a-box
+            height="0.25"
+            depth=" 0.01"
+            width="0.2"
+            color="black"
+            position="-0.3 -0.3 0"
+          ></a-box
+        ></a-entity>
+
+        <a-entity id="n0" sound="src: #tick; on: click;volume:5">
+          <a-entity
+            text="value: 0 ;wrapCount:1; align:center;"
+            scale="0.13 0.13 0.13"
+            position="0.16 0.3 0.011"
+          ></a-entity>
+          <a-box
+            height="0.25"
+            depth=" 0.01"
+            width="0.2"
+            color="black"
+            position="0.16 0.3 0"
+          ></a-box
+        ></a-entity>
+
+        <a-entity id="n6" sound="src: #tick; on: click;volume:5">
+          <a-entity
+            text="value: 6 ;wrapCount:1; align:center;"
+            scale="0.13 0.13 0.13"
+            position="0.16 0 0.011"
+          ></a-entity>
+          <a-box
+            height="0.25"
+            depth=" 0.01"
+            width="0.2"
+            color="black"
+            position="0.16 0 0"
+          ></a-box
+        ></a-entity>
+
+        <a-entity id="n3" sound="src: #tick; on: click;volume:5">
+          <a-entity
+            text="value: 3 ;wrapCount:1; align:center;"
+            scale="0.13 0.13 0.13"
+            position="0.16 -0.3 0.011"
+          ></a-entity>
+          <a-box
+            height="0.25"
+            depth=" 0.01"
+            width="0.2"
+            color="black"
+            position="0.16 -0.3 0"
+          ></a-box
+        ></a-entity>
+
+        <a-entity id="nope"  sound="src: #tick; on: click;volume:5">
+          <a-entity
+            text="value: - ;wrapCount:1; align:center;"
+            scale="0.13 0.13 0.13"
+            position="0.37 0.3 0.011"
+          ></a-entity>
+          <a-box
+            id="op"
+            height="0.25"
+            depth=" 0.01"
+            width="0.15"
+            color="black"
+            position="0.37 0.3 0"
+          >
+          </a-box
+        ></a-entity>
+
+        <a-entity id="play" sound="src: #success; on: click;volume:2">
+          <a-entity
+            text="value: Enter ;wrapCount:5; align:center;"
+            scale="0.13 0.13 0.13"
+            position="0.37 -0.15 0.011"
+          ></a-entity>
+          <a-box
+            height="0.55"
+            depth=" 0.01"
+            width="0.15"
+            color="black"
+            position="0.37 -0.15 0"
+          ></a-box
+        ></a-entity>
+        
+        <a-entity id="home" sound="src: #hover; on: mouseenter;volume:2">
+          <a-image src="https://cdn.glitch.global/b219fdd4-33d6-404f-9722-66b827ed821a/home%20(1).png?v=1654998999415" height="0.15" width= "0.15" position="0.35 -0.65 0.1"></a-image>
+          <a-box
+            height="0.2"
+            depth=" 0.01"
+            width="0.2"
+            color="black"
+            position="0.37 -0.7 0"
+          ></a-box
+        ></a-entity>
+      </a-plane>
+
+      <a-entity
+        id="BCC"  
+        gltf-model="https://cdn.glitch.global/b219fdd4-33d6-404f-9722-66b827ed821a/bcc2.gltf?v=1654018953628"
+        scale="150 200 200"
+        position="20 1 0"
+        look-at="#cam"
+        animation__scale="property:scale; to: 0 0 0;enabled:false"
+        animation__position="property:position; to: -16.5 6.8 5;enabled:false"
+      ></a-entity>
+      
+
+      
+      
+      <!__________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________>
+      
+  <a-box
+        id="box2"
+        position="2.5 2.5 17.5"
+        height="5"
+        width="5"
+        depth="5"
+        animation__rotate="property:rotation; from: 0 0 0; to : 0 360 0; loop:true; easing:easeInOutSine; dur:50000"
+        opacity="0" color="white"
+        side="double"
+        scale="0 0 0"
+        animation__opacity="property: opacity; from:0; to:0.2; delay: 1450 ; enabled:false"
+        animation__scale="property: scale; from: 0 0 0; to: 1 1 1; dur: 1500; enabled:false"
+      >
+        <a-entity
+          id="lines2"
+          visible="false"
+          glow="side: front; scale:1.3; c: 1; p: 1.3; color: #FF00FF;"
+          animation__visible="property: visible; from:false; to:true; delay: 1300 ; enabled:false"
+                  
+          line="start: -2.5 -2.5 -2.5; end: -2.5 -2.5 2.5; color: #FF3131; lineWidth:20"
+          line__2="start: -2.5 -2.5 -2.5; end: -2.5 2.5 -2.5; color: #39FF14"
+          line__3="start:-2.5 -2.5 -2.5; end: 2.5 -2.5 -2.5; color: #1F51FF"
+          line__7="start: -2.5 2.5 -2.5; end: -2.5 2.5 2.5; color: white; opacity:0.5"
+          line__9="start: -2.5 2.5 -2.5; end: 2.5 2.5 -2.5; color: white; opacity:0.5"
+          line__11="start:-2.5 -2.5 2.5; end: -2.5 2.5 2.5; color: white; opacity:0.5"
+          line__12="start:-2.5 -2.5 2.5; end: 2.5 -2.5 2.5; color: white; opacity:0.5"
+          line__13="start: 2.5 2.5 2.5; end: 2.5 2.5 -2.5; color: white; opacity:0.5"
+          line__15="start:2.5 -2.5 -2.5; end: 2.5 2.5 -2.5; color: white;opacity:0.5"
+          line__16="start:2.5 -2.5 -2.5; end: 2.5 -2.5 2.5; color: white;opacity:0.5"
+          line__17="start:2.5 -2.5 -2.5; end: 2.5 -2.5 -2.5; color: white;opacity:0.5"
+          line__19="start:2.5 -2.5 2.5; end: 2.5 2.5 2.5; color: white;opacity:0.5"
+          line__20="start:2.5 -2.5 2.5; end: 2.5 -2.5 -2.5; color: white;opacity:0.5"
+          line__23="start:-2.5 2.5 2.5; end: 2.5 2.5 2.5; color: white;opacity:0.5"
+                  
+          line__a="start: -2.501 -2.501 -2.501; end: -2.501 -2.501 2.501; color: #FF3131; "
+          line__b="start: -2.501 -2.501 -2.501; end: -2.501 2.501 -2.501; color: #39FF14"
+          line__c="start:-2.501 -2.501 -2.501; end: 2.501 -2.501 -2.501; color: #1F51FF"     
+          line__a1="start: -2.499 -2.499 -2.499; end: -2.499 -2.499 2.499; color: #FF3131; "
+          line__b1="start: -2.499 -2.499 -2.499; end: -2.499 2.499 -2.499; color: #39FF14"
+          line__c1="start:-2.499 -2.499 -2.499; end: 2.499 -2.499 -2.499; color: #1F51FF" 
+          line__a2="start: -2.502 -2.502 -2.502; end: -2.502 -2.502 2.502; color: #FF3131; "
+          line__b2="start: -2.502 -2.502 -2.502; end: -2.502 2.502 -2.502; color: #39FF14"
+          line__c2="start:-2.502 -2.502 -2.502; end: 2.502 -2.502 -2.502; color: #1F51FF"     
+          line__a3="start: -2.498 -2.498 -2.498; end: -2.498 -2.498 2.498; color: #FF3131; "
+          line__b3="start: -2.498 -2.498 -2.498; end: -2.498 2.498 -2.498; color: #39FF14"
+          line__c3="start:-2.498 -2.498 -2.498; end: 2.498 -2.498 -2.4998; color: #1F51FF"  
+          line__a4="start:-2.503 -2.503 -2.503; end: -2.503 -2.503  2.503; color: #FF3131; "
+          line__b4="start:-2.503 -2.503 -2.503; end: -2.503  2.503 -2.503; color: #39FF14"
+          line__c4="start:-2.503 -2.503 -2.503; end:  2.503 -2.503 -2.503; color: #1F51FF"     
+          line__a5="start:-2.497 -2.497 -2.497; end: -2.497 -2.497  2.497; color: #FF3131; "
+          line__b5="start:-2.497 -2.497 -2.497; end: -2.497  2.497 -2.497; color: #39FF14"
+          line__c5="start:-2.497 -2.497 -2.497; end:  2.497 -2.497 -2.497; color: #1F51FF"        
+                  
+        ></a-entity>
+        <a-entity id="arrows2"   animation__visible="property: visible; from:false; to:true; delay: 1300 ; enabled:false" visible="false">
+        <a-cone  color="#39FF14" radius-bottom="0.15" radius-top="0" height="0.22" position="-2.5 0 -2.5" segments-radial="4" rotation="0 45 0"></a-cone>
+        
+         <a-cone  color="#FF3131" radius-bottom="0.15" radius-top="0" height="0.22" position="-2.5 -2.5 0"       segments-radial="4" rotation="90 0 0"></a-cone> 
+        
+          <a-cone  color="#1F51FF" radius-bottom="0.15" radius-top="0" height="0.22" position="0 -2.5 -2.5"       segments-radial="4" rotation="90 0 -90"></a-cone> </a-entity>
+        <a-entity id="spheres2">
+          <a-sphere
+            position="0 0 0"
+            radius="0.5"
+            color="#00C8FF"
+            opacity="0.6"
+          ></a-sphere>
+          <a-sphere
+            position="-2.5 -2.5 2.5"
+            radius="0.5"
+            color="#00C8FF"
+            opacity="0.6"
+          ></a-sphere>
+          <a-sphere
+            position="-2.5 -2.5 -2.5"
+            radius="0.5"
+            color="#00C8FF"
+            opacity="0.6"
+          ></a-sphere>
+          <a-sphere
+            position="-2.5 2.5 2.5"
+            radius="0.5"
+            color="#00C8FF"
+            opacity="0.6"
+          ></a-sphere>
+          <a-sphere
+            position="-2.5 2.5 -2.5"
+            radius="0.5"
+            color="#00C8FF"
+            opacity="0.6"
+          ></a-sphere>
+          <a-sphere
+            position="2.5 2.5 2.5"
+            radius="0.5"
+            color="#00C8FF"
+            opacity="0.6"
+          ></a-sphere>
+          <a-sphere
+            position="2.5 2.5 -2.5"
+            radius="0.5"
+            color="#00C8FF"
+            opacity="0.6"
+          ></a-sphere>
+          <a-sphere
+            position="2.5 -2.5 2.5"
+            radius="0.5"
+            color="#00C8FF"
+            opacity="0.6"
+          ></a-sphere>
+          <a-sphere
+            position="2.5 -2.5 -2.5"
+            radius="0.5"
+            color="#00C8FF"
+            opacity="0.6"
+          ></a-sphere>
+        </a-entity>
+
+        <a-entity position="-2.5 -2.5 -2.5" id="myPlane2">
+          <a-triangle
+            id="triangle3"
+            vertex-a=" 0 0 0"
+            vertex-b=" 0 0 0"
+            vertex-c=" 0 0 0"
+            material="side:double; color: #FFF01F; opacity:0.7"
+          ></a-triangle>
+          <a-triangle
+            id="triangle4"
+            vertex-a=" 0 0 0"
+            vertex-b=" 0 0 0"
+            vertex-c=" 0 0 0"
+            material="side:double; color: #FFF01F; opacity:0.7"
+          ></a-triangle>
+        </a-entity>
+      </a-box>
+
+
+<!---------------------------->
+      
+            <a-entity
+        visible="false"
+        look-at="#cam"
+        id="text2"
+        text="value:0  0  0;wrapCount:7; align:center; color:black"
+        geometry="primitive:plane; color:black ;height:0.35; width: 0.8"
+        scale="4 3 1 "
+        position="-6 0 15.5"
+      ></a-entity>
+
+   <!--   <a-entity
+        look-at="#cam"
+        text="value:Take Quiz;wrapCount:10; align:center; color:white"
+        geometry="primitive:plane; color:black ;height:0.35; width: 1"
+        scale="7 7 1 "
+        position="-15 5 5"
+      ></a-entity>
+
+      <a-entity
+        look-at="#cam"
+        text="value:Back to home;wrapCount:10; align:center; color:white"
+        geometry="primitive:plane; color:black ;height:0.35; width: 1"
+        scale="7 7 1 "
+        position="-15 2 5"
+      ></a-entity>
+
+      <a-entity
+        look-at="#cam"
+        text="value:LOG OUT;wrapCount:10; align:center; color:white"
+        geometry="primitive:plane; color:black ;height:0.35; width: 1"
+        scale="7 7 1 "
+        position="-15 -1 5"
+      ></a-entity>
+-->  
+      <a-entity >
+      <a-box
+             id="m2"
+        position="2.5 1.8 20.5"
+        scale="6 6 6"
+        animation__rotate="property:rotation; from: 0 0 0; to : 360 360 360; loop:true; easing:easeInOutSine; dur:50000"
+        opacity="0"
+        side="double"
+        event-set__enter="_event: mouseenter; scale: 6.5 6.5 6.5"
+        event-set__leave="_event:mouseleave;scale: 6 6 6"
+        event-set__click1="_event: click; animation__scale.enabled:true"
+        event-set__click2="_event: click; _target: #box2; animation__scale.enabled:true"
+        event-set__clisck3="_event: click; _target: #lines2; animation__visible.enabled:true"
+        event-set__cliscka="_event: click; _target: #arrows2; animation__visible.enabled:true"     
+        event-set__clisck4="_event: click; _target: #box2; animation__opacity.enabled:true"
+        event-set__click5="_event:click; _target: #numpad; animation__scale.enabled:true"
+        
+        animation__scale="property: scale; from: 6.5 6.5 6.5; to: 0 0 0; dur: 1500; enabled:false"
+        event-set__click6="_event: click;_target: #text2; visible :true"
+        event-set__click7="_event: click;_target:#BCC2; animation__scale.enabled:true; animation__position.enabled:true"
+             
+                     event-set__enter2="_event: mouseenter; scale: 6.5 6.5 6.5"
+        event-set__leave2="_event:mouseleave;scale: 6 6 6"
+        event-set__click12="_event: click;_target:#m1; animation__scale.enabled:true"
+        event-set__click22="_event: click; _target: #box; animation__scale.enabled:true"
+        event-set__clisck32="_event: click; _target: #lines; animation__visible.enabled:true"
+        event-set__cliscka2="_event: click; _target: #arrows; animation__visible.enabled:true"     
+        event-set__clisck42="_event: click; _target: #box; animation__opacity.enabled:true"
+        event-set__click52="_event:click; _target: #numpad2; animation__scale.enabled:true"
+       
+        event-set__click62="_event: click;_target: #text; visible :true"
+        event-set__click72="_event: click;_target:#BCC; animation__scale.enabled:true; animation__position.enabled:true"
+             sound="src: #swipe; on: click;volume:2"
+      >
+        <a-entity
+          gltf-model="https://cdn.glitch.global/b219fdd4-33d6-404f-9722-66b827ed821a/BCC%20real.gltf?v=1653946563758"
+        ></a-entity
+      ></a-box></a-entity>
+
+     
+
+
+      <a-plane
+        id="numpad"
+        color="black"
+        opacity="0.5"
+        position="12 3.3 5"
+        scale="0 0 0"
+        animation__scale="property:scale; from: 0 0 0; to: 7 5 7; enabled:false"
+        look-at="#cam"
+      >
+        <a-entity
+          id="input2"
+          text="value: 0 0 0  ;wrapCount:10; align:center;"
+          scale="0.6 0.6 0.6"
+          position="0 0.7 0.011"
+        ></a-entity>
+        <a-box
+          height="0.25"
+          depth=" 0.01"
+          width="1"
+          color="black"
+          opacity="0.6"
+          position="0 0.7 0"
+        ></a-box>
+
+        <a-entity id="n82" sound="src: #tick; on: click;volume:5">
+          <a-entity
+            text="value: 8 ;wrapCount:1; align:center;"
+            scale="0.13 0.13 0.13"
+            position="-0.07 0.3 0.011"
+          ></a-entity>
+
+          <a-box
+            height="0.25"
+            depth=" 0.01"
+            width="0.2"
+            color="black"
+            position="-0.07 0.3 0"
+          ></a-box
+        ></a-entity>
+
+        <a-entity id="n52" sound="src: #tick; on: click;volume:5">
+          <a-entity
+            text="value: 5 ;wrapCount:1; align:center;"
+            scale="0.13 0.13 0.13"
+            position="-0.07 0 0.011"
+          ></a-entity>
+
+          <a-box
+            height="0.25"
+            depth=" 0.01"
+            width="0.2"
+            color="black"
+            position="-0.07 0 0"
+          ></a-box
+        ></a-entity>
+
+        <a-entity id="n22" sound="src: #tick; on: click;volume:5">
+          <a-entity
+            text="value: 2 ;wrapCount:1; align:center;"
+            scale="0.13 0.13 0.13"
+            position="-0.07 -0.3 0.011"
+          ></a-entity>
+          <a-box
+            height="0.25"
+            depth=" 0.01"
+            width="0.2"
+            color="black"
+            position="-0.07 -0.3 0"
+          ></a-box
+        ></a-entity>
+
+        <a-entity id="n72" sound="src: #tick; on: click;volume:5">
+          <a-entity
+            text="value: 7 ;wrapCount:1; align:center;"
+            scale="0.13 0.13 0.13"
+            position="-0.3 0.3 0.011"
+          ></a-entity>
+          <a-box
+            height="0.25"
+            depth=" 0.01"
+            width="0.2"
+            color="black"
+            position="-0.3 0.3 0"
+          ></a-box
+        ></a-entity>
+
+        <a-entity id="n42" sound="src: #tick; on: click;volume:5">
+          <a-entity
+            text="value: 4 ;wrapCount:1; align:center;"
+            scale="0.13 0.13 0.13"
+            position="-0.3 0 0.011"
+          ></a-entity>
+          <a-box
+            height="0.25"
+            depth=" 0.01"
+            width="0.2"
+            color="black"
+            position="-0.3 0 0"
+          ></a-box>
+        </a-entity>
+
+        <a-entity id="n12" sound="src: #tick; on: click;volume:5">
+          <a-entity
+            text="value: 1 ;wrapCount:1; align:center;"
+            scale="0.13 0.13 0.13"
+            position="-0.3 -0.3 0.011"
+          ></a-entity>
+          <a-box
+            height="0.25"
+            depth=" 0.01"
+            width="0.2"
+            color="black"
+            position="-0.3 -0.3 0"
+          ></a-box
+        ></a-entity>
+
+        <a-entity id="n02" sound="src: #tick; on: click;volume:5">
+          <a-entity
+            text="value: 0 ;wrapCount:1; align:center;"
+            scale="0.13 0.13 0.13"
+            position="0.16 0.3 0.011"
+          ></a-entity>
+          <a-box
+            height="0.25"
+            depth=" 0.01"
+            width="0.2"
+            color="black"
+            position="0.16 0.3 0"
+          ></a-box
+        ></a-entity>
+
+        <a-entity id="n62" sound="src: #tick; on: click;volume:5">
+          <a-entity
+            text="value: 6 ;wrapCount:1; align:center;"
+            scale="0.13 0.13 0.13"
+            position="0.16 0 0.011"
+          ></a-entity>
+          <a-box
+            height="0.25"
+            depth=" 0.01"
+            width="0.2"
+            color="black"
+            position="0.16 0 0"
+          ></a-box
+        ></a-entity>
+
+        <a-entity id="n32" sound="src: #tick; on: click;volume:5">
+          <a-entity
+            text="value: 3 ;wrapCount:1; align:center;"
+            scale="0.13 0.13 0.13"
+            position="0.16 -0.3 0.011"
+          ></a-entity>
+          <a-box
+            height="0.25"
+            depth=" 0.01"
+            width="0.2"
+            color="black"
+            position="0.16 -0.3 0"
+          ></a-box
+        ></a-entity>
+
+        <a-entity id="nope2"  sound="src: #tick; on: click;volume:5">
+          <a-entity
+            text="value: - ;wrapCount:1; align:center;"
+            scale="0.13 0.13 0.13"
+            position="0.37 0.3 0.011"
+          ></a-entity>
+          <a-box
+            id="op2"
+            height="0.25"
+            depth=" 0.01"
+            width="0.15"
+            color="black"
+            position="0.37 0.3 0"
+          >
+          </a-box
+        ></a-entity>
+
+        <a-entity id="play2" sound="src: #success; on: click;volume:2">
+          <a-entity
+            text="value: Enter ;wrapCount:5; align:center;"
+            scale="0.13 0.13 0.13"
+            position="0.37 -0.15 0.011"
+          ></a-entity>
+          <a-box
+            height="0.55"
+            depth=" 0.01"
+            width="0.15"
+            color="black"
+            position="0.37 -0.15 0"
+          ></a-box
+        ></a-entity>
+        
+         <a-entity id="home2" sound="src: #hover; on: mouseenter;volume:2">
+          <a-image src="https://cdn.glitch.global/b219fdd4-33d6-404f-9722-66b827ed821a/home%20(1).png?v=1654998999415" height="0.15" width= "0.15" position="0.35 -0.65 0.1"></a-image>
+          <a-box
+            height="0.2"
+            depth=" 0.01"
+            width="0.2"
+            color="black"
+            position="0.37 -0.7 0"
+          ></a-box
+        ></a-entity>
+      </a-plane>
+
+      <a-entity
+        id="BCC2"  
+        rotation="0 180 0"        
+        gltf-model="https://cdn.glitch.global/b219fdd4-33d6-404f-9722-66b827ed821a/bcc2.gltf?v=1654018953628"
+        scale="150 200 200"
+        position="-10 1 20"
+        look-at="#cam"
+        animation__scale="property:scale; to: 0 0 0;enabled:false"
+        animation__position="property:position; to: -16.5 6.8 5;enabled:false"
+      ></a-entity>
+      
+
+      
+    </a-scene>
+  </body>
+
+</html>

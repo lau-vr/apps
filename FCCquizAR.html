@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+<!-- include ar.js for A-Frame -->
+<script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script>
+<script src="https://unpkg.com/aframe-orbit-controls@1.2.0/dist/aframe-orbit-controls.min.js"></script> 
+   <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
+   <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
+    
+    <script src="FCCquizAR.js"></script>
+     <style>
+
+/* CSS */
+    .buttoncontainer{
+      position: fixed; 
+      width:100%; 
+      text-align: center;
+      top:86%;
+      left:0%;
+    }
+    
+.button-51 {
+  background-color: transparent;
+  border: 1px solid #266DB6;
+  box-sizing: border-box;
+  color: #00132C;
+  font-family: "Avenir Next LT W01 Bold",sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  padding: 16px 23px;
+  position: relative;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-51:hover,
+.button-51:active {
+  outline: 0;
+}
+
+.button-51:hover {
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.button-51:before {
+  background-color: #D5EDF6;
+  content: "";
+  height: calc(100% + 3px);
+  position: absolute;
+  right: -7px;
+  top: -9px;
+  transition: background-color 300ms ease-in;
+  width: 100%;
+  z-index: -1;
+}
+
+.button-51:hover:before {
+  background-color: #6DCFF6;
+}
+
+@media (min-width: 768px) {
+  .button-51 {
+    padding: 16px 32px;
+  }
+}</style>
+ 
+  <link rel="shortcut icon" href="favicon.png"><script type="text/javascript" src="crystallographic_FCCQuizAR.90d8fdf03045fbc2f808.bundle.js"></script></head>
+  <body>
+    <a-scene embedded arjs vr-mode-ui="enabled: false">
+      
+       <a-assets>
+      <audio
+               id="hover"
+               src="https://cdn.glitch.global/b219fdd4-33d6-404f-9722-66b827ed821a/hover.mp3?v=1654333972335"
+               preload="auto"></audio>
+      
+            <audio
+               id="dooropen"
+               src="https://cdn.glitch.global/b219fdd4-33d6-404f-9722-66b827ed821a/mixkit-creaky-door-open-195.wav?v=1654334563867"
+               preload="auto"></audio>
+            <audio
+               id="doorclose"
+               src="https://cdn.glitch.global/b219fdd4-33d6-404f-9722-66b827ed821a/mixkit-creaky-closing-wood-door-189.wav?v=1654334675319"
+               preload="auto"></audio>  
+            <audio
+               id="swipe"
+               src="https://cdn.glitch.global/b219fdd4-33d6-404f-9722-66b827ed821a/swipe.mp3?v=1654333972688"
+               preload="auto"></audio>  
+            <audio
+                   id="tick"
+                   src="https://cdn.glitch.global/b219fdd4-33d6-404f-9722-66b827ed821a/CEPW748-clock-tick%20(mp3cut.net).mp3?v=1654335631435"
+                   preload="auto"
+                   ></audio>
+      <audio
+             id="success"
+             src="https://cdn.glitch.global/b219fdd4-33d6-404f-9722-66b827ed821a/mixkit-magic-sweep-game-trophy-257.mp3?v=1654337422271"
+             preload="auto"></audio>
+                
+    </a-assets>
+      
+      
+      
+      <a-entity laser-controls="hand: right"></a-entity>
+      <a-entity id="here" rotation="0 -30 0" position="2.5 4 25" >
+      <a-camera id="cam" position="" wasd-controls="enabled:false">  <a-entity
+           cursor="fuseTimeout: 500"
+          position="0 0 -1"
+          geometry="primitive: ring; radiusInner: 0.017; radiusOuter: 0.03"
+          material="color: white; shader: flat; opacity:0.5"
+          animation__click="property: scale; 
+                              startEvents: click; 
+                              easing: easeInCubic; 
+                              dur: 150; 
+                              from: 0.1 0.1 0.1; to: 1 1 1"
+        >
+        <a-sound id="wrong" src=" https://cdn.glitch.global/b219fdd4-33d6-404f-9722-66b827ed821a/mixkit-bell-ring-buzzer-2962%20(online-audio-converter.com).mp3?v=1654593593919" autoplay="false" ></a-sound>
+         <a-sound id="right" src="https://cdn.glitch.global/b219fdd4-33d6-404f-9722-66b827ed821a/mixkit-video-game-treasure-2066.wav?v=1654593986593" autoplay="false" ></a-sound>
+
+        </a-entity></a-camera>
+      </a-entity>
+        
+      <a-entity position="0 -2.7 0" environment="preset: moon; lighting: none; skyType:atmosphere;">
+        <a-entity light="intensity: 0.27; type: ambient;"></a-entity>
+        
+        <a-light type="directional" position="0 21.697 34.447" rotation="-90 0 0" target="#directionaltarget" intensity="0.8">
+          <a-entity id="directionaltarget" position="0 50.534 -19.584"></a-entity>
+        </a-light>
+      </a-entity>
+
+      <a-box
+        id="box"
+        position="2.5 2.5 2.5"
+        height="5"
+        width="5"
+        depth="5"
+        animation__rotate="property:rotation; from: 0 0 0; to : 0 360 0; loop:true; easing:easeInOutSine; dur:50000"
+        opacity="0.2"
+        side="double"
+        scale="1 1 1" 
+      >
+        <a-entity
+          id="lines"
+          glow="side: front; scale:1.3; c: 1; p: 1.3; color: #FF00FF;"
+        
+                  
+          line="start: -2.5 -2.5 -2.5; end: -2.5 -2.5 2.5; color: #FF3131; lineWidth:20"
+          line__2="start: -2.5 -2.5 -2.5; end: -2.5 2.5 -2.5; color: #39FF14"
+          line__3="start:-2.5 -2.5 -2.5; end: 2.5 -2.5 -2.5; color: #1F51FF"
+          line__7="start: -2.5 2.5 -2.5; end: -2.5 2.5 2.5; color: white; opacity:0.5"
+          line__9="start: -2.5 2.5 -2.5; end: 2.5 2.5 -2.5; color: white; opacity:0.5"
+          line__11="start:-2.5 -2.5 2.5; end: -2.5 2.5 2.5; color: white; opacity:0.5"
+          line__12="start:-2.5 -2.5 2.5; end: 2.5 -2.5 2.5; color: white; opacity:0.5"
+          line__13="start: 2.5 2.5 2.5; end: 2.5 2.5 -2.5; color: white; opacity:0.5"
+          line__15="start:2.5 -2.5 -2.5; end: 2.5 2.5 -2.5; color: white;opacity:0.5"
+          line__16="start:2.5 -2.5 -2.5; end: 2.5 -2.5 2.5; color: white;opacity:0.5"
+          line__17="start:2.5 -2.5 -2.5; end: 2.5 -2.5 -2.5; color: white;opacity:0.5"
+          line__19="start:2.5 -2.5 2.5; end: 2.5 2.5 2.5; color: white;opacity:0.5"
+          line__20="start:2.5 -2.5 2.5; end: 2.5 -2.5 -2.5; color: white;opacity:0.5"
+          line__23="start:-2.5 2.5 2.5; end: 2.5 2.5 2.5; color: white;opacity:0.5"
+                  
+          line__a="start: -2.501 -2.501 -2.501; end: -2.501 -2.501 2.501; color: #FF3131; "
+          line__b="start: -2.501 -2.501 -2.501; end: -2.501 2.501 -2.501; color: #39FF14"
+          line__c="start:-2.501 -2.501 -2.501; end: 2.501 -2.501 -2.501; color: #1F51FF"     
+          line__a1="start: -2.499 -2.499 -2.499; end: -2.499 -2.499 2.499; color: #FF3131; "
+          line__b1="start: -2.499 -2.499 -2.499; end: -2.499 2.499 -2.499; color: #39FF14"
+          line__c1="start:-2.499 -2.499 -2.499; end: 2.499 -2.499 -2.499; color: #1F51FF" 
+          line__a2="start: -2.502 -2.502 -2.502; end: -2.502 -2.502 2.502; color: #FF3131; "
+          line__b2="start: -2.502 -2.502 -2.502; end: -2.502 2.502 -2.502; color: #39FF14"
+          line__c2="start:-2.502 -2.502 -2.502; end: 2.502 -2.502 -2.502; color: #1F51FF"     
+          line__a3="start: -2.498 -2.498 -2.498; end: -2.498 -2.498 2.498; color: #FF3131; "
+          line__b3="start: -2.498 -2.498 -2.498; end: -2.498 2.498 -2.498; color: #39FF14"
+          line__c3="start:-2.498 -2.498 -2.498; end: 2.498 -2.498 -2.4998; color: #1F51FF"  
+          line__a4="start:-2.503 -2.503 -2.503; end: -2.503 -2.503  2.503; color: #FF3131; "
+          line__b4="start:-2.503 -2.503 -2.503; end: -2.503  2.503 -2.503; color: #39FF14"
+          line__c4="start:-2.503 -2.503 -2.503; end:  2.503 -2.503 -2.503; color: #1F51FF"     
+          line__a5="start:-2.497 -2.497 -2.497; end: -2.497 -2.497  2.497; color: #FF3131; "
+          line__b5="start:-2.497 -2.497 -2.497; end: -2.497  2.497 -2.497; color: #39FF14"
+          line__c5="start:-2.497 -2.497 -2.497; end:  2.497 -2.497 -2.497; color: #1F51FF"        
+                  
+        ></a-entity>
+        <a-entity id="arrows"   >
+        <a-cone  color="#39FF14" radius-bottom="0.15" radius-top="0" height="0.22" position="-2.5 0 -2.5" segments-radial="4" rotation="0 45 0"></a-cone>
+        
+         <a-cone  color="#FF3131" radius-bottom="0.15" radius-top="0" height="0.22" position="-2.5 -2.5 0"       segments-radial="4" rotation="90 0 0"></a-cone> 
+        
+          <a-cone  color="#1F51FF" radius-bottom="0.15" radius-top="0" height="0.22" position="0 -2.5 -2.5"       segments-radial="4" rotation="90 0 -90"></a-cone> </a-entity>
+        <a-entity id="spheres">
+          <a-sphere
+            position="0 -2.5 0"
+            radius="0.5"
+            color="#64DE91"
+            opacity="0.6"
+          ></a-sphere>
+          <a-sphere
+            position="0 2.5 0"
+            radius="0.5"
+            color="#64DE91"
+            opacity="0.6"
+          ></a-sphere>
+          <a-sphere
+            position="0 0 2.5"
+            radius="0.5"
+            color="#64DE91"
+            opacity="0.6"
+          ></a-sphere>
+          <a-sphere
+            position="2.5 0 0"
+            radius="0.5"
+            color="#64DE91"
+            opacity="0.6"
+          ></a-sphere>
+          <a-sphere
+            position="0 0 -2.5"
+            radius="0.5"
+            color="#64DE91"
+            opacity="0.6"
+          ></a-sphere>
+          <a-sphere
+            position="-2.5 0 0"
+            radius="0.5"
+            color="#64DE91"
+            opacity="0.6"
+          ></a-sphere>
+          <a-sphere
+            position="-2.5 -2.5 2.5"
+            radius="0.5"
+            color="#64DE91"
+            opacity="0.6"
+          ></a-sphere>
+          <a-sphere
+            position="-2.5 -2.5 -2.5"
+            radius="0.5"
+            color="#64DE91"
+            opacity="0.6"
+          ></a-sphere>
+          <a-sphere
+            position="-2.5 2.5 2.5"
+            radius="0.5"
+            color="#64DE91"
+            opacity="0.6"
+          ></a-sphere>
+          <a-sphere
+            position="-2.5 2.5 -2.5"
+            radius="0.5"
+            color="#64DE91"
+            opacity="0.6"
+          ></a-sphere>
+          <a-sphere
+            position="2.5 2.5 2.5"
+            radius="0.5"
+            color="#64DE91"
+            opacity="0.6"
+          ></a-sphere>
+          <a-sphere
+            position="2.5 2.5 -2.5"
+            radius="0.5"
+            color="#64DE91"
+            opacity="0.6"
+          ></a-sphere>
+          <a-sphere
+            position="2.5 -2.5 2.5"
+            radius="0.5"
+            color="#64DE91"
+            opacity="0.6"
+          ></a-sphere>
+          <a-sphere
+            position="2.5 -2.5 -2.5"
+            radius="0.5"
+            color="#64DE91"
+            opacity="0.6"
+          ></a-sphere>
+        </a-entity>
+
+        <a-entity position="-2.5 -2.5 -2.5" id="myPlane">
+          <a-triangle
+            id="triangle1"
+            vertex-a=" 0 0 0"
+            vertex-b=" 0 0 0"
+            vertex-c=" 0 0 0"
+            material="side:double; color: #FFF01F; opacity:0.7"
+          ></a-triangle>
+          <a-triangle
+            id="triangle2"
+            vertex-a=" 0 0 0"
+            vertex-b=" 0 0 0"
+            vertex-c=" 0 0 0"
+            material="side:double; color: #FFF01F; opacity:0.7"
+          ></a-triangle>
+        </a-entity>
+      </a-box>
+
+      <a-entity
+   
+        look-at="#cam"
+        id="text"
+        text="value:SCORE: 0 ;wrapCount:9; align:center; color:black"
+        geometry="primitive:plane; color:black ;height:0.35; width: 0.8"
+        scale="4 3 1 "
+        position="10.000 .1 3.000"
+      ></a-entity>
+
+
+      <a-plane
+        id="question"
+        color="black"
+        opacity="0.5"
+        position="9 3.3 6"
+        scale="5 5 5"
+        look-at="#cam"
+      >
+        <a-entity
+          text="value: Choose the correct answer ;wrapCount:15; align:center;"
+          scale="0.7 0.7 0.7"
+          position="0 0.7 0.011"
+        ></a-entity>
+        <a-box
+          height="0.25"
+          depth=" 0.01"
+          width="1"
+          color="black"
+          
+               acity="0.6"
+          position="0 0.7 0"
+        ></a-box>
+        
+          <a-entity id="op1"  sound="src:#hover;on:mouseenter;volume:1"
+                  event-set__scale="_event: mouseenter;_target:#option1; animation__scale.enabled:true; animation__descale.enabled:false"
+                  event-set__descale="_event: mouseleave; _target:#option1; animation__descale.enabled:true; animation__scale.enabled:false">
+          <a-entity
+                    
+            text="value: aa ;wrapCount:7; align:center;"
+            scale="0.5 0.5 0.5"
+            position="0 0.25 0.011"
+            id="option1"        
+            animation__scale="property:scale; from: 0.4 0.4 0.4; to: 0.5 0.5 0.5; dur:100; enabled:false"
+                  animation__descale="property:scale; from: 0.5 0.5 0.5; to: 0.4 0.4 0.4; dur:100; enabled:false"        
+          ></a-entity>
+
+          <a-box
+                 id="b1"
+            height="0.18"
+            depth=" 0.01"
+            width="0.8"
+            color="black"
+            position="0 0.25 0"
+          ></a-box
+        ></a-entity>
+
+        <a-entity id="op2"   sound="src:#hover;on:mouseenter;volume:1"
+                  event-set__scale="_event: mouseenter;_target:#option2; animation__scale.enabled:true; animation__descale.enabled:false"
+                  event-set__descale="_event: mouseleave; _target:#option2; animation__descale.enabled:true; animation__scale.enabled:false">
+          <a-entity
+            text="value: bb ;wrapCount:7; align:center;"
+            scale="0.5 0.5 0.5"
+            position="0 0 0.011"
+            id="option2"        
+            animation__scale="property:scale; from: 0.4 0.4 0.4; to: 0.5 0.5 0.5; dur:100; enabled:false"
+                  animation__descale="property:scale; from: 0.5 0.5 0.5; to: 0.4 0.4 0.4; dur:100; enabled:false"         
+          ></a-entity>
+
+          <a-box
+                 id="b2"
+            height="0.18"
+            depth=" 0.01"
+            width="0.8"
+            color="black"
+            position="0 0 0"
+          ></a-box
+        ></a-entity>
+        
+         <a-entity id="op3"   sound="src:#hover;on:mouseenter;volume:1"
+                  event-set__scale="_event: mouseenter;_target:#option3; animation__scale.enabled:true; animation__descale.enabled:false"
+                  event-set__descale="_event: mouseleave; _target:#option3; animation__descale.enabled:true; animation__scale.enabled:false">
+          <a-entity
+            text="value:cc ;wrapCount:7; align:center;"
+            scale="0.5 0.5 0.5"
+            position="0 -0.25 0.011"
+            id="option3"        
+            animation__scale="property:scale; from: 0.4 0.4 0.4; to: 0.5 0.5 0.5; dur:100; enabled:false"
+                  animation__descale="property:scale; from: 0.5 0.5 0.5; to: 0.4 0.4 0.4; dur:100; enabled:false"         
+          ></a-entity>
+
+          <a-box
+                 id="b3"
+            height="0.18"
+            depth=" 0.01"
+            width="0.8"
+            color="black"
+            position="0 -0.25 0"
+          ></a-box
+        ></a-entity>
+        
+        
+      </a-plane>
+
+
+    </a-scene>
+      <div class="buttoncontainer">
+      <button class="button-51" id="quiz">Quit Quiz</button>
+      <button class="button-51" id="AR_VR">VR</button>
+      <button class="button-51" id="choosemodel">Another Model</button>
+      </div>
+      
+  </body>
+
+</html>
