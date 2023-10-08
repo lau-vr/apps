@@ -49,7 +49,7 @@ window.addEventListener("load", (event) => {
     var cursorEntity = document.createElement("a-entity");
     cursorEntity.setAttribute("cursor", "");
     cursorEntity.setAttribute("position", "0 0 -0.6");
-    cursorEntity.setAttribute("geometry", `primitive: sphere; radius: 0.004;`);
+    cursorEntity.setAttribute("geometry", `primitive: sphere; radius: 0.012;`);
     cursorEntity.setAttribute(
       "material",
       "color: #000; shader: flat; opacity: 0.6"

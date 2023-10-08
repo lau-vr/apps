@@ -56,7 +56,7 @@ window.addEventListener("load", (event) => {
     cursorEntity.setAttribute("id", "cursor");
     cursorEntity.setAttribute("cursor", "");
     cursorEntity.setAttribute("position", "0 0 -0.6");
-    cursorEntity.setAttribute("geometry", `primitive: sphere; radius: 0.006;`);
+    cursorEntity.setAttribute("geometry", `primitive: sphere; radius: 0.012;`);
     cursorEntity.setAttribute(
       "material",
       "color: #000; shader: flat; opacity: 0.6"
