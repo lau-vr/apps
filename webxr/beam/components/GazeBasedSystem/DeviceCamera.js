@@ -24,13 +24,14 @@ window.addEventListener("load", (event) => {
     camera.setAttribute("position", "0 1.7 0");
     camera.setAttribute("look-controls", "pointerLockEnabled: false;");
     var cursorEntity = document.createElement("a-entity");
-    cursorEntity.setAttribute("cursor", "");
-    cursorEntity.setAttribute("position", "0 0 -0.1");
-    cursorEntity.setAttribute("geometry", `primitive: sphere; radius: 0.0015;`);
+    cursorEntity.setAttribute("cursor", "fuseTimeout: 500");
+    cursorEntity.setAttribute("position", "0 0 -1");
+    cursorEntity.setAttribute("geometry", `primitive: ring; radiusInner: 0.017; radiusOuter: 0.03`);
     cursorEntity.setAttribute(
       "material",
       "color: #000; shader: flat; opacity: 0.6"
     );
+    cursorEntity.setAttribute("animation__click","property: scale; startEvents: click; easing: easeInCubic; dur: 150; from: 0.1 0.1 0.1; to: 1 1 1")
     camera.appendChild(cursorEntity);
   } else if (device === "Mobile") {
     camera.setAttribute("position", "0 1.68 0");
@@ -38,13 +39,14 @@ window.addEventListener("load", (event) => {
     camera.setAttribute("look-controls", "pointerLockEnabled: false;");
     camera.setAttribute("wasd-controls", "acceleration: 200");
     var cursorEntity = document.createElement("a-entity");
-    cursorEntity.setAttribute("cursor", "");
-    cursorEntity.setAttribute("position", "0 0 -0.6");
-    cursorEntity.setAttribute("geometry", `primitive: sphere; radius: 0.012;`);
+    cursorEntity.setAttribute("cursor", "fuseTimeout: 500");
+    cursorEntity.setAttribute("position", "0 0 -1");
+    cursorEntity.setAttribute("geometry", `primitive: ring; radiusInner: 0.017; radiusOuter: 0.03`);
     cursorEntity.setAttribute(
       "material",
       "color: #000; shader: flat; opacity: 0.6"
     );
+    cursorEntity.setAttribute("animation__click","property: scale; startEvents: click; easing: easeInCubic; dur: 150; from: 0.1 0.1 0.1; to: 1 1 1")
     camera.appendChild(cursorEntity);
 
     createTeleport("left-teleport", "-2.2 0.3 -1.7", rig, "-2.2 0 -1.7");
