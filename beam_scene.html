@@ -12,7 +12,7 @@
 
     gtag('config', 'UA-41295198-4');
   </script>
-<link rel="shortcut icon" href="favicon.png"><script type="text/javascript" src="beam_vr.0df77d3e596bc10ebaed.bundle.js"></script></head>
+<link rel="shortcut icon" href="favicon.png"><script type="text/javascript" src="beam_vr.a1e2118cb56a6802060f.bundle.js"></script></head>
 
 <body>
 <a-scene shadow="type: pcfsoft" physics="driver: local; gravity: 0; friction: 0; restitution: 0;" renderer="antialias: true" raycaster="objects: [my-slider]">
@@ -45,7 +45,7 @@
   </a-entity>
 
 
-  <a-entity scale="2 2 2" position="2.8 1.4 0" rotation="0 0 0"  data-aabb-collider-dynamic="true" class="grabbable" beam-variable-ui="beam: #beam; beam_upper: #beam_upper; beam_lower: #beam_lower;">
+  <a-entity scale="2 2 2" position="1.8 1.4 1" rotation="0 -35 0"  data-aabb-collider-dynamic="true" class="grabbable" beam-variable-ui="beam: #beam; beam_upper: #beam_upper; beam_lower: #beam_lower;">
   </a-entity>
 
   <!-- Walls -->
@@ -61,10 +61,10 @@
             layer="layer1"></a-entity>
   
           
-  <a-entity scale="2 2 2" position="3 2 0" rotation="0 0 0" data-aabb-collider-dynamic="true" class="grabbable" >
+  <a-entity scale="2 2 2" position="-1.6 1.5 1.3" rotation="0 35 0" data-aabb-collider-dynamic="true" class="grabbable" >
     <a-entity my-toggle="title: Hide Colors; active: false;" event-set__inactive="_target: #group; group.colour_by: 1;" event-set__active="_target: #group; group.colour_by: 0;" position="0.35 0 0"></a-entity>
   </a-entity>
-  <a-obj-model id="play" src="#play-button" position="3.9 1.3 0" rotation="0 0 0" scale="0.3 0.3 0.3" data-aabb-collider-dynamic="true" class="grabbable"></a-obj-model>
+  <a-obj-model id="play" src="#play-button" position="-0.7 1.8 0.9" rotation="0 35 0" scale="0.3 0.3 0.3" data-aabb-collider-dynamic="true" class="grabbable"></a-obj-model>
 
   <a-entity id="function-text" position="0.5 2.5 -2.6" rotation="0 0 0" scale="1.5 1.5 1.5" my-text="text: Bending Beam ; color: white"></a-entity>
   <a-entity id="function-text" position="-3 1.6 1" rotation="0 90 0" scale="1.5 1.5 1.5" my-text="text: Beam Type: Steel ; color: white"></a-entity>
