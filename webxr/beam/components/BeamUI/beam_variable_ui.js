@@ -57,12 +57,12 @@ AFRAME.registerComponent('beam-variable-ui', {
             plus.setAttribute("gltf-model", "#plus")
             plus.setAttribute("scale", "0.0055 0.0055 0.0055")
             plus.setAttribute("rotation", "90 0 0")
-            plus.setAttribute('position', `0.1 ${index * -height + offset + 0.03} 0`)
+            plus.setAttribute('position', `0.15 ${index * -height + offset + 0.03} 0`)
             let minus = document.createElement("a-entity")
             minus.setAttribute("gltf-model", "#minus")
             minus.setAttribute("scale", "0.0055 0.0055 0.0055")
             minus.setAttribute("rotation", "90 0 0")
-            minus.setAttribute('position', `-0.45 ${index * -height + offset + 0.03} 0`)
+            minus.setAttribute('position', `-0.5 ${index * -height + offset + 0.03} 0`)
             var interval = null
             if(getDevice() === "Mobile"){
                 plus.addEventListener("mouseenter", () => {

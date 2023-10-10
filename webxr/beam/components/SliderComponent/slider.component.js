@@ -59,7 +59,7 @@ AFRAME.registerComponent('my-slider', {
 
         const titleText = new MeshText2D(this.data.title, { align: textAlign.center,  font: '36px Arial', fillStyle: '#FFFFFF' , antialias: true });
         titleText.scale.set(0.001,0.001,0.001);
-        titleText.position.y = 0.16;
+        titleText.position.y = 0.18;
         titleText.position.z = 0.02;
         titleText.rotateY(-Math.PI / 2);
         this.lever.add(titleText)
